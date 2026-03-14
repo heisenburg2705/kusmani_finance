@@ -1,8 +1,18 @@
 -- RLS Policies for Kusmani Finance
 -- All policies enforce permission checks at database level
 
+-- Enable RLS on all tables
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE pockets ENABLE ROW LEVEL SECURITY;
+ALTER TABLE pocket_members ENABLE ROW LEVEL SECURITY;
+ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE budgets ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ai_conversations ENABLE ROW LEVEL SECURITY;
+
 -- ==== PROFILES ====
--- Users can only view their own profile
+-- Users can only view and update their own profile
 DROP POLICY IF EXISTS "profiles_select_own" ON profiles;
 DROP POLICY IF EXISTS "profiles_update_own" ON profiles;
 DROP POLICY IF EXISTS "profiles_insert_own" ON profiles;
@@ -13,9 +23,8 @@ CREATE POLICY "profiles_select_own" ON profiles
 CREATE POLICY "profiles_update_own" ON profiles
   FOR UPDATE USING (id = auth.uid());
 
--- INSERT is handled by trigger on auth.users, no direct INSERT from client allowed
-CREATE POLICY "profiles_insert_own" ON profiles
-  FOR INSERT WITH CHECK (false);
+-- INSERT handled by trigger function (SECURITY DEFINER bypasses RLS)
+-- No need for INSERT policy
 
 -- ==== POCKETS ====
 -- Users can SELECT pockets they own or are members of
