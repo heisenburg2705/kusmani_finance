@@ -23,7 +23,7 @@
     "react-refresh/only-export-components": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "react/no-unescaped-entities": "warn"
+    "react/no-unescaped-entities": "off"
   },
   "settings": {
     "react": {
