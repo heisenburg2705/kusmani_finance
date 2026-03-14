@@ -102,15 +102,8 @@ export function useAuth(): UseAuthReturn {
         return { error: signUpError?.message || 'Signup failed' }
       }
 
-      // Step 2: Create profile with authenticated context
-      // Get fresh session to ensure JWT is valid
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-
-      if (sessionError || !session) {
-        return { error: 'Failed to get session after signup' }
-      }
-
-      // Insert profile - RLS will allow because id = auth.uid()
+      // Step 2: Create profile using service role key (bypass RLS)
+      // Need to create profile immediately before email verification
       const { error: profileError } = await supabase.from('profiles').insert({
         id: data.user.id,
         username: email.split('@')[0],
