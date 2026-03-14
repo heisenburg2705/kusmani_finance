@@ -1,4 +1,4 @@
-import { Transaction } from '@types/index'
+import { Transaction } from '@types'
 import { useDeleteTransaction } from '@hooks/useTransactions'
 import {
   formatRupiah,

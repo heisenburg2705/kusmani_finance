@@ -1,4 +1,4 @@
-import { Transaction } from '@types/index'
+import { Transaction } from '@types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 interface SpendingChartProps {

@@ -1,4 +1,4 @@
-import { AuditLog } from '@types/index'
+import { AuditLog } from '@types'
 import { formatDateShort } from '@lib/formatters'
 
 interface AuditLogsTableProps {

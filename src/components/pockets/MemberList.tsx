@@ -1,5 +1,5 @@
 import { usePocketMembers, useUpdateMemberRole, useRemovePocketMember } from '@hooks/usePocketMembers'
-import { PocketRole } from '@types/index'
+import { PocketRole } from '@types'
 
 interface MemberListProps {
   pocketId: string

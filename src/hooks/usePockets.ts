@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '@lib/supabase'
-import { Pocket, PocketFormData } from '@types/index'
+import { Pocket, PocketFormData } from '@types'
 import { useAuth } from './useAuth'
 import toast from 'react-hot-toast'
 

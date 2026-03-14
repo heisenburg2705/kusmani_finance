@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TransactionFormData, TransactionType } from '@types/index'
+import { TransactionFormData, TransactionType } from '@types'
 import { useCreateTransaction } from '@hooks/useTransactions'
 import { formatDateISO } from '@lib/formatters'
 

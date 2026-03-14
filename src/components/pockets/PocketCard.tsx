@@ -1,4 +1,4 @@
-import { Pocket } from '@types/index'
+import { Pocket } from '@types'
 import { formatRupiah } from '@lib/formatters'
 
 interface PocketCardProps {

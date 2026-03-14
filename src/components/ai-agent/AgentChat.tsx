@@ -74,11 +74,11 @@ export function AgentChat({ selectedPocketId }: AgentChatProps) {
                       <p>
                         <strong>🔧 {toolCall.name}</strong>
                       </p>
-                      {toolCall.result && (
-                        <p className="text-green-700">✓ Success: {JSON.stringify(toolCall.result).slice(0, 50)}...</p>
+                      {toolCall.result !== undefined && (
+                        <p className="text-green-700">✓ Success: {String(JSON.stringify(toolCall.result)).slice(0, 50)}...</p>
                       )}
                       {toolCall.error && (
-                        <p className="text-red-700">✗ Error: {toolCall.error}</p>
+                        <p className="text-red-700">✗ Error: {String(toolCall.error)}</p>
                       )}
                     </div>
                   ))}

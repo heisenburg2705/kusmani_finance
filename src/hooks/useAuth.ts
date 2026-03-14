@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Session, User } from '@supabase/supabase-js'
 import { supabase } from '@lib/supabase'
-import { Profile } from '@types/index'
+import { Profile } from '@types'
 
 interface UseAuthReturn {
   user: User | null
@@ -180,7 +180,7 @@ export function useAuth(): UseAuthReturn {
         return { error: error.message }
       }
 
-      setProfile((prev) => (prev ? { ...prev, ...updates } : null))
+      setProfile((prev: Profile | null) => (prev ? { ...prev, ...updates } : null))
       return { error: null }
     } catch (error) {
       return { error: String(error) }

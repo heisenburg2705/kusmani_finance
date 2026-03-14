@@ -1,4 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk'
+import type { Tool } from './ai/types'
 
 // Initialize Anthropic client - NOTE: Only use VITE_ prefix for client-side
 // For production, move this to backend/edge function
@@ -7,6 +7,7 @@ export const createClaudeClient = () => {
   if (!apiKey) {
     throw new Error('Missing VITE_CLAUDE_API_KEY environment variable')
   }
+  const Anthropic = require('@anthropic-ai/sdk').default
   return new Anthropic({ apiKey })
 }
 
@@ -14,7 +15,7 @@ export const createClaudeClient = () => {
  * Define all AI Agent tools
  * These should match the available operations in the app
  */
-export const aiTools: Anthropic.Tool[] = [
+export const aiTools: Tool[] = [
   {
     name: 'get_transactions',
     description: 'Ambil daftar transaksi dari pocket tertentu',

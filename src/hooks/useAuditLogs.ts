@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@lib/supabase'
-import { AuditLog } from '@types/index'
+import { AuditLog } from '@types'
 
 interface AuditLogsFilter {
   tableName?: string

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCreateBudget } from '@hooks/useBudgets'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@lib/supabase'
-import { BudgetPeriod, Category } from '@types/index'
+import { BudgetPeriod, Category } from '@types'
 
 interface BudgetFormProps {
   pocketId: string

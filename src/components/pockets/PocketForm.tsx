@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useCreatePocket } from '@hooks/usePockets'
-import { PocketFormData } from '@types/index'
+import { PocketFormData } from '@types'
 
 interface PocketFormProps {
   onSuccess?: () => void
