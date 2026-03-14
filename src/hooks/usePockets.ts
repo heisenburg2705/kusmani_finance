@@ -99,7 +99,7 @@ export function useCreatePocket() {
       queryClient.invalidateQueries({ queryKey: ['pockets'] })
       toast.success('Pocket berhasil dibuat')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -138,7 +138,7 @@ export function useUpdatePocket() {
       queryClient.invalidateQueries({ queryKey: ['pocket', variables.pocketId] })
       toast.success('Pocket berhasil diupdate')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -163,7 +163,7 @@ export function useDeletePocket() {
       queryClient.invalidateQueries({ queryKey: ['pockets'] })
       toast.success('Pocket berhasil dihapus')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })

@@ -1,4 +1,3 @@
-import { Budget } from '@types/index'
 import { useBudgets, useDeleteBudget } from '@hooks/useBudgets'
 import { formatRupiah } from '@lib/formatters'
 

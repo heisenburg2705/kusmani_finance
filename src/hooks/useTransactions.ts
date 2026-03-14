@@ -61,7 +61,7 @@ export function useCreateTransaction() {
       queryClient.invalidateQueries({ queryKey: ['pockets'] })
       toast.success('Transaksi berhasil ditambahkan')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -105,7 +105,7 @@ export function useUpdateTransaction() {
       queryClient.invalidateQueries({ queryKey: ['pockets'] })
       toast.success('Transaksi berhasil diupdate')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -137,7 +137,7 @@ export function useDeleteTransaction() {
       queryClient.invalidateQueries({ queryKey: ['pockets'] })
       toast.success('Transaksi berhasil dihapus')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })

@@ -51,7 +51,7 @@ export function useInvitePocketMember() {
       queryClient.invalidateQueries({ queryKey: ['pocket-members', variables.pocketId] })
       toast.success('Member berhasil diundang')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -84,7 +84,7 @@ export function useUpdateMemberRole() {
       queryClient.invalidateQueries({ queryKey: ['pocket-members', variables.pocketId] })
       toast.success('Role berhasil diupdate')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -115,7 +115,7 @@ export function useRemovePocketMember() {
       queryClient.invalidateQueries({ queryKey: ['pocket-members', variables.pocketId] })
       toast.success('Member berhasil dihapus')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })

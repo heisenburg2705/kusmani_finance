@@ -65,7 +65,7 @@ export function useCreateBudget() {
       queryClient.invalidateQueries({ queryKey: ['budgets', variables.pocketId] })
       toast.success('Budget berhasil dibuat')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })
@@ -96,7 +96,7 @@ export function useDeleteBudget() {
       queryClient.invalidateQueries({ queryKey: ['budgets', variables.pocketId] })
       toast.success('Budget berhasil dihapus')
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error('Error: ' + error.message)
     },
   })

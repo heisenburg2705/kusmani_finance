@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { useAIAgent, AgentMessage } from '@hooks/useAIAgent'
-import { formatRupiah } from '@lib/formatters'
+import { useAIAgent } from '@hooks/useAIAgent'
 
 interface AgentChatProps {
   selectedPocketId?: string
