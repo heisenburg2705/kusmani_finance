@@ -93,7 +93,7 @@ export function useAuth(): UseAuthReturn {
   ): Promise<{ error: string | null }> => {
     try {
       // Sign up (profile will be auto-created by DB trigger)
-      const { data, error: signUpError } = await supabase.auth.signUp({
+      const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
