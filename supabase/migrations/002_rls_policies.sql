@@ -13,8 +13,9 @@ CREATE POLICY "profiles_select_own" ON profiles
 CREATE POLICY "profiles_update_own" ON profiles
   FOR UPDATE USING (id = auth.uid());
 
+-- INSERT is handled by trigger on auth.users, no direct INSERT from client allowed
 CREATE POLICY "profiles_insert_own" ON profiles
-  FOR INSERT WITH CHECK (id = auth.uid());
+  FOR INSERT WITH CHECK (false);
 
 -- ==== POCKETS ====
 -- Users can SELECT pockets they own or are members of

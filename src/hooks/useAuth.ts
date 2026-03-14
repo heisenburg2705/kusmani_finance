@@ -92,27 +92,20 @@ export function useAuth(): UseAuthReturn {
     displayName?: string
   ): Promise<{ error: string | null }> => {
     try {
-      // Sign up
+      // Sign up (profile will be auto-created by DB trigger)
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            display_name: displayName,
+            username: email.split('@')[0],
+          },
+        },
       })
 
       if (signUpError) {
         return { error: signUpError.message }
-      }
-
-      if (data.user) {
-        // Create profile
-        const { error: profileError } = await supabase.from('profiles').insert({
-          id: data.user.id,
-          username: email.split('@')[0],
-          display_name: displayName || email.split('@')[0],
-        })
-
-        if (profileError) {
-          return { error: profileError.message }
-        }
       }
 
       return { error: null }
