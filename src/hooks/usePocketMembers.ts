@@ -66,7 +66,6 @@ export function useUpdateMemberRole() {
   return useMutation({
     mutationFn: async ({
       memberId,
-      pocketId,
       role,
     }: {
       memberId: string
@@ -99,7 +98,6 @@ export function useRemovePocketMember() {
   return useMutation({
     mutationFn: async ({
       memberId,
-      pocketId,
     }: {
       memberId: string
       pocketId: string

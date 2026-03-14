@@ -87,7 +87,9 @@ export class GroqAIProvider extends BaseAIProvider {
     }
 
     const message = data.choices[0].message
-    const finishReason = data.choices[0].finish_reason as 'end_turn' | 'tool_use' | 'max_tokens'
+    const finishReason = data.choices[0].finish_reason
+
+    const stopReason: 'tool_use' | 'end_turn' = finishReason === 'tool_calls' ? 'tool_use' : 'end_turn'
 
     return {
       content: message.content || '',
@@ -98,7 +100,7 @@ export class GroqAIProvider extends BaseAIProvider {
             arguments: JSON.parse(call.function.arguments),
           }))
         : undefined,
-      stop_reason: finishReason === 'tool_calls' ? 'tool_use' : (finishReason as any),
+      stop_reason: stopReason,
     }
   }
 }

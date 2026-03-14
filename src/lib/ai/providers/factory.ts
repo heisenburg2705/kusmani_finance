@@ -1,5 +1,4 @@
 import { AIProvider, AIProviderConfig } from '../types'
-import { BaseAIProvider } from './base'
 import { GroqAIProvider } from './groq'
 import { ClaudeAIProvider } from './claude'
 

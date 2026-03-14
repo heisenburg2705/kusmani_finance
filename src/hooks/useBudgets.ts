@@ -80,7 +80,6 @@ export function useDeleteBudget() {
   return useMutation({
     mutationFn: async ({
       budgetId,
-      pocketId,
     }: {
       budgetId: string
       pocketId: string

@@ -76,7 +76,6 @@ export function useUpdateTransaction() {
   return useMutation({
     mutationFn: async ({
       transactionId,
-      pocketId,
       data,
     }: {
       transactionId: string
@@ -120,7 +119,6 @@ export function useDeleteTransaction() {
   return useMutation({
     mutationFn: async ({
       transactionId,
-      pocketId,
     }: {
       transactionId: string
       pocketId: string

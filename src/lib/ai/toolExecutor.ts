@@ -7,6 +7,13 @@
 import { supabase } from '../supabase'
 import { ToolExecutionRequest, ToolExecutionResult } from './types'
 
+interface Transaction {
+  category_id: string | null
+  amount: number
+  type: string
+  [key: string]: unknown
+}
+
 /**
  * Execute tool request
  */
@@ -148,7 +155,7 @@ async function executeGetSpendingSummary(request: ToolExecutionRequest) {
 
   // Group by category
   const summary = (data || []).reduce(
-    (acc: Record<string, number>, transaction: any) => {
+    (acc: Record<string, number>, transaction: Transaction) => {
       const categoryId = transaction.category_id || 'uncategorized'
       acc[categoryId] = (acc[categoryId] || 0) + transaction.amount
       return acc
@@ -208,12 +215,12 @@ async function executeAnalyzeSpending(request: ToolExecutionRequest) {
 
   // Simple analysis
   const expenses = (transactions || [])
-    .filter((t: any) => t.type === 'expense')
-    .reduce((sum: number, t: any) => sum + t.amount, 0)
+    .filter((t: Transaction) => t.type === 'expense')
+    .reduce((sum: number, t: Transaction) => sum + t.amount, 0)
 
   const income = (transactions || [])
-    .filter((t: any) => t.type === 'income')
-    .reduce((sum: number, t: any) => sum + t.amount, 0)
+    .filter((t: Transaction) => t.type === 'income')
+    .reduce((sum: number, t: Transaction) => sum + t.amount, 0)
 
   const analysis = {
     period_days: days,

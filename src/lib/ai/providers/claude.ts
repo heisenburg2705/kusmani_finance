@@ -1,6 +1,7 @@
 import { BaseAIProvider } from './base'
 import { AIResponse, Message, Tool, AIProviderConfig } from '../types'
 import Anthropic from '@anthropic-ai/sdk'
+import type { ContentBlock, Messages } from '@anthropic-ai/sdk/resources'
 
 /**
  * Claude AI Provider
@@ -29,7 +30,7 @@ export class ClaudeAIProvider extends BaseAIProvider {
         temperature: options?.temperature ?? this.config.temperature ?? 0.7,
         system: messages[0]?.role === 'system' ? messages[0].content : undefined,
         messages: messages[0]?.role === 'system' ? messages.slice(1) : messages,
-        tools: tools ? (this.convertTools(tools) as any) : undefined,
+        tools: tools ? this.convertTools(tools) : undefined,
       })
 
       return this.parseResponse(response)
@@ -53,18 +54,23 @@ export class ClaudeAIProvider extends BaseAIProvider {
   /**
    * Parse Claude response
    */
-  protected parseResponse(response: any): AIResponse {
-    const textBlock = response.content.find((block: any) => block.type === 'text')
-    const toolUseBlocks = response.content.filter((block: any) => block.type === 'tool_use')
+  protected parseResponse(response: Messages.Message): AIResponse {
+    const textBlock = response.content.find((block: ContentBlock) => block.type === 'text')
+    const toolUseBlocks = response.content.filter((block: ContentBlock) => block.type === 'tool_use')
 
     return {
-      content: textBlock?.text || '',
+      content: (textBlock && textBlock.type === 'text') ? textBlock.text : '',
       tool_calls: toolUseBlocks.length > 0
-        ? toolUseBlocks.map((block: any) => ({
-            id: block.id,
-            name: block.name,
-            arguments: block.input,
-          }))
+        ? toolUseBlocks.map((block) => {
+            if (block.type === 'tool_use') {
+              return {
+                id: block.id,
+                name: block.name,
+                arguments: block.input as Record<string, unknown>,
+              }
+            }
+            throw new Error('Expected tool_use block')
+          })
         : undefined,
       stop_reason: response.stop_reason === 'tool_use' ? 'tool_use' : 'end_turn',
     }
