@@ -74,3 +74,4 @@ See `CLAUDE.md` for critical rules and guidelines.
 ## License
 
 MIT
+-
