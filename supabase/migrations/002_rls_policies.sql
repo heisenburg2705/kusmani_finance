@@ -23,8 +23,9 @@ CREATE POLICY "profiles_select_own" ON profiles
 CREATE POLICY "profiles_update_own" ON profiles
   FOR UPDATE USING (id = auth.uid());
 
--- INSERT handled by trigger function (SECURITY DEFINER bypasses RLS)
--- No need for INSERT policy
+-- Allow INSERT during signup: user can create their own profile
+CREATE POLICY "profiles_insert_own" ON profiles
+  FOR INSERT WITH CHECK (id = auth.uid());
 
 -- ==== POCKETS ====
 -- Users can SELECT pockets they own or are members of

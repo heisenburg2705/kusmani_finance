@@ -92,20 +92,33 @@ export function useAuth(): UseAuthReturn {
     displayName?: string
   ): Promise<{ error: string | null }> => {
     try {
-      // Sign up (profile will be auto-created by DB trigger)
-      const { error: signUpError } = await supabase.auth.signUp({
+      // Step 1: Create auth user
+      const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            display_name: displayName,
-            username: email.split('@')[0],
-          },
-        },
       })
 
-      if (signUpError) {
-        return { error: signUpError.message }
+      if (signUpError || !data.user) {
+        return { error: signUpError?.message || 'Signup failed' }
+      }
+
+      // Step 2: Create profile with authenticated context
+      // Get fresh session to ensure JWT is valid
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+
+      if (sessionError || !session) {
+        return { error: 'Failed to get session after signup' }
+      }
+
+      // Insert profile - RLS will allow because id = auth.uid()
+      const { error: profileError } = await supabase.from('profiles').insert({
+        id: data.user.id,
+        username: email.split('@')[0],
+        display_name: displayName || email.split('@')[0],
+      })
+
+      if (profileError) {
+        return { error: profileError.message }
       }
 
       return { error: null }
