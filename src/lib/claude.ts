@@ -1,3 +1,4 @@
+import Anthropic from '@anthropic-ai/sdk'
 import type { Tool } from './ai/types'
 
 // Initialize Anthropic client - NOTE: Only use VITE_ prefix for client-side
@@ -7,7 +8,6 @@ export const createClaudeClient = () => {
   if (!apiKey) {
     throw new Error('Missing VITE_CLAUDE_API_KEY environment variable')
   }
-  const Anthropic = require('@anthropic-ai/sdk').default
   return new Anthropic({ apiKey })
 }
 
