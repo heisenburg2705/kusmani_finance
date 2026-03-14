@@ -59,7 +59,6 @@ export function AIAgentPage() {
           <div className="card">
             <h3 className="font-semibold text-slate-900 mb-3">⚙️ How It Works</h3>
             <p className="text-sm text-slate-600 space-y-2">
-              {/* eslint-disable-next-line react/no-unescaped-entities */}
               <div>AI agent menggunakan Groq (development) atau Claude (production) untuk processing natural language dan execute tools.</div>
               <div>Setiap tool execution membutuhkan konfirmasi untuk destructive operations.</div>
             </p>
